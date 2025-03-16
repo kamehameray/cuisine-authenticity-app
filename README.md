@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Authentic Cuisine Finder
+
+A web application to help users find authentic restaurants for various cuisines, based on reviews from people who know the cuisine best.
+
+## Features
+
+- Search for restaurants by location, cuisine type, or specific dishes
+- View authenticity ratings based on review analysis
+- User contributions for authenticity verification
+- Premium features for enthusiasts and food explorers
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, Tailwind CSS
+- **Backend**: Next.js API routes, Node.js
+- **Database**: MongoDB Atlas
+- **Authentication**: Auth0
+- **API Integration**: Google Places API, Yelp Fusion API
+- **Payment Processing**: Stripe
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js (version 14 or later)
+- npm or yarn
+- MongoDB Atlas account
+- Google Cloud Platform account (for Google Places API)
+- Auth0 account
+- Stripe account (for payment processing)
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```
+# API Keys
+GOOGLE_PLACES_API_KEY=your_google_places_api_key
+YELP_API_KEY=your_yelp_api_key
+
+# Auth0
+NEXT_PUBLIC_AUTH0_DOMAIN=your_auth0_domain
+NEXT_PUBLIC_AUTH0_CLIENT_ID=your_auth0_client_id
+AUTH0_SECRET=your_auth0_secret
+
+# MongoDB
+MONGODB_URI=your_mongodb_connection_string
+
+# Stripe
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository
+   ```
+   git clone https://github.com/yourusername/authentic-cuisine-finder.git
+   cd authentic-cuisine-finder
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies
+   ```
+   npm install
+   # or
+   yarn install
+   ```
 
-## Learn More
+3. Run the development server
+   ```
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+cuisine-authenticity-app/
+├── public/                     # Static files
+├── src/                        # Source code
+│   ├── components/             # Reusable UI components
+│   ├── context/                # React context providers
+│   ├── hooks/                  # Custom React hooks
+│   ├── lib/                    # Library code
+│   ├── pages/                  # Next.js pages
+│   │   ├── api/                # API routes
+│   ├── services/               # External service integrations
+│   ├── styles/                 # CSS styles
+│   ├── types/                  # TypeScript type definitions
+│   └── utils/                  # Utility functions
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application can be easily deployed on Vercel or Netlify.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+npm run build
+# or
+yarn build
+```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
