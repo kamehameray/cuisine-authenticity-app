@@ -1,10 +1,11 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { AuthProvider } from '../context/AuthContext';
+import Layout from '../components/layout/Layout';
 
-// Create a client
+// Create a react-query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,8 +17,8 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const authRedirectUri = typeof window !== 'undefined' 
-    ? window.location.origin 
-    : 'http://localhost:3000';
+    ? `${window.location.origin}/auth/callback`
+    : 'http://localhost:3000/auth/callback';
 
   return (
     <Auth0Provider
@@ -25,12 +26,17 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID || ''}
       authorizationParams={{
         redirect_uri: authRedirectUri,
+        audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE,
+        scope: 'openid profile email',
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-        {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </QueryClientProvider>
+      </AuthProvider>
     </Auth0Provider>
   );
 }
